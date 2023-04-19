@@ -1,0 +1,34 @@
+<!-- Write an interface to create a list from user input.
+
+For every list item:
+
+    Ask a user about its content using prompt.
+    Create the <li> with it and add it to <ul>.
+    Continue until the user cancels the input (by pressing Esc or via an empty entry).
+
+All elements should be created dynamically. -->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Entered list:</h1>
+    <ol id="elem">
+
+    </ol>
+    
+    <script>
+        let response;
+        let elem = document.querySelector('#elem')
+        while (response = prompt('Enter `li` content')) {
+            let li = document.createElement('li')
+            li.append(response)
+            elem.append(li)
+        }
+    </script>
+</body>
+</html>
