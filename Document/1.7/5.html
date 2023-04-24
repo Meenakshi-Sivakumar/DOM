@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+      border-collapse: collapse;
+    }
+    td,th {
+      border: 1px solid black;
+      padding: 3px;
+      text-align: center;
+    }
+    th {
+      font-weight: bold;
+      background-color: #E6E6E6;
+    }
+    </style>
+</head>
+<body>
+
+
+    <div id="calendar"></div>
+
+  <script>
+    function createCalendar(elem, year, month) {
+  // ... code that generates the calndar in elem...
+  // 0 as date argument gives last date of given month
+  // because month is 0 based in javascript
+  const endDate = new Date(year, month, 0).getDate();
+
+  let startDay = new Date(year, month - 1, 1).getDay()
+  if (startDay == 0) startDay = 7;
+
+  
+  const table = document.createElement("table");
+  let isPrinting = false;
+  let num = 1;
+  
+  for (let row = 1; row <= 7; row++) {
+    
+    let tr = document.createElement("tr");
+    if (num <= endDate) table.append(tr);
+
+    for (let col = 1; col <= 7; col++) {
+
+      if (row == 1) {
+        createHeaders(tr, col);
+        continue
+      }
+
+      let td = document.createElement("td")
+      tr.append(td)
+      if (!isPrinting && startDay == col) isPrinting = true
+
+      if (num <= endDate && isPrinting) td.innerHTML = num++
+      
+      
+    }
+  }
+  elem.append(table);
+}
+
+function createHeaders(tr, col) {
+  let th = document.createElement("th");
+  tr.append(th);
+  switch (col) {
+    case 1:
+      th.innerHTML = "MO";
+      break;
+    case 2:
+      th.innerHTML = "TU";
+      break;
+    case 3:
+      th.innerHTML = "WE";
+      break;
+    case 4:
+      th.innerHTML = "TH";
+      break;
+    case 5:
+      th.innerHTML = "FR";
+      break;
+    case 6:
+      th.innerHTML = "SA";
+      break;
+    case 7:
+      th.innerHTML = "SU";
+      break;
+  }
+    }
+
+    createCalendar(calendar, 2012, 1);
+  </script>
+</body>
+</html>
